@@ -1,0 +1,45 @@
+{% extends "groups/group_base.html" %}
+
+{% block pregroup %}
+<div class="container">
+  <h1 >{{group.name}} Tasks</h1>
+</div>
+{% endblock %}
+
+{% block group_content %}
+<div class="container">
+<div class="row">
+	{% if group.posts.count == 0 %}
+	<h2>No Tasks in this group yet!</h2>
+	{% else %}
+
+  <table class="table table-striped" style="margin-top: 20px;">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Status</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+
+    <tbody>
+		{% for post in group.posts.all %}
+    <tr>
+			{% include "posts/_post.html" %}
+    </tr>
+		{% endfor %}
+    </tbody>
+  </table>
+
+	{% endif %}
+
+  {% if user.is_authenticated %}
+  <a href="{% url 'posts:create' %}" class="btn btn-warning" role="button" style="margin-top:40px;"><span class="fa fa-plus"></span> Create New Task!</a>
+	{% endif %}
+
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "groups/group_base.html" %}
+{% load bootstrap4 %}
+
+{% block group_content %}
+<div class="container">
+  {% if not form.instance.pk %}
+    <h4>Create A New Project</h4>
+    <form method="POST" action="{% url 'groups:create' %}" id="groupForm">
+    	{% csrf_token %}
+    	{% bootstrap_form form %}
+      {% buttons %}
+    		<button type="submit" class="btn btn-primary btn-large">Create</button>
+    	{% endbuttons %}
+    </form>
+
+  {% else %}
+  <h4>Update Project</h4>
+  <form method="POST" action="{% url 'groups:update' pk=group.pk %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary btn-large">Update</button>
+    {% endbuttons %}
+  </form>
+ {% endif %}
+
+</div>
+{% endblock %}

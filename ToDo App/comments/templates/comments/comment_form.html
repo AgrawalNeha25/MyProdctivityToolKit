@@ -1,0 +1,15 @@
+{% extends "comments/comment_base.html" %}
+
+{% load bootstrap4 %}
+
+{% block comment_content %}
+<h4>Create New Comment</h4>
+<form method="POST" action="{% url 'comments:create' %}" enctype='multipart/form-data' id="commentForm">
+	{% csrf_token %}
+	{% bootstrap_form form %}
+	{% buttons %}
+		<button type="submit" class="btn btn-primary btn-large">Create</button>
+	{% endbuttons %}
+</form>
+
+{% endblock %}
